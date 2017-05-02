@@ -64,8 +64,19 @@ function Switchery(element, options) {
     }
   }
 
-  if (this.element != null && this.element.type == 'checkbox') this.init();
-  if (this.isDisabled() === true) this.disable();
+  if (this.element != null && this.element.type == 'checkbox') {
+    this.init(); 
+    if (this.isDisabled() === true) this.disable();
+  }
+}
+
+Switchery.prototype.reInit = function (switcheryNode) {
+    this.switcher = switcheryNode;
+    this.element = switcheryNode.previousElementSibling;
+    this.jack = switcheryNode.firstElementChild;
+    this.events = events(switcheryNode, this);
+    this.handleChange();
+    this.handleClick();
 }
 
 /**
